@@ -1,1 +1,1 @@
-# C-ile-Kutuphane-Projesi
+# C ile Kitap Mağazası Yönetim ve Satış Sistemi
