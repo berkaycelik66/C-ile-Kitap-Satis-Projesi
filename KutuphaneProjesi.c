@@ -2,7 +2,6 @@
 #include<string.h>
 #include<unistd.h>
 
-void kayitol(void);
 int sepet(void);
 void kitapgir(void);
 int girilenkitaplar(void);
@@ -15,11 +14,6 @@ void kat_turkroman(void);
 int sepetsayac=0; //Sepetteki kitap sayisini kontrol edecek
 double tutar=0;	//Sepet tutarini kontrol edecek
 int gir_kitap_sayi=0; //Kullanici tarafindan girilen kitap sayisini kontrol edecek
-
-struct giris{ //Programa girerken kullanicinin giris yapmasi icindir.
-	char eposta[50];
-	long int sifre;
-}b[1];
 
 struct kitap{ //Kullanicinin girdigi kitaplari kontrol edecek
 	char kitap[30];
@@ -35,47 +29,11 @@ struct sepet{ //Sepete eklenen kitaplari kontrol edecek
 }s[50];
 
 int main(){
-	
-	char kullanicikontrol[30]; //kaydolurken girilen e-postayý giris yaparken kontrol edecek
-	long int sifrekontrol; //kaydolurken girilen sifreyi giris yaparken kontrol edecek
-	int secim=1;
-	
-	while(secim>0)
-	{
-		printf("1-Kayit Olustur\n");
-		printf("2-Giris Yap\n");
-		printf("Seciminizi Yapin: ");
-		scanf("%d",&secim);
-		if(secim==1)
-		{
-			kayitol();
-		}
-		else if(secim==2)
-		{
-			printf("\nE-posta: ");
-			scanf("%s",kullanicikontrol);
-			printf("Sifre: ");
-			scanf("%ld",&sifrekontrol);
-			if(strcmp(kullanicikontrol,b[0].eposta)!=0)//epostalar uyuþmazsa tekrar giriþ yaptýracak
-			{
-				printf("\n***!!!Girilen E-posta Hatali!!!***\n\n");
-			}
-			if(sifrekontrol!=b[0].sifre)//sifreler uyusmazsa tekrar giris yaptýracak
-			{
-				printf("\n***!!!Girilen Sifre Hatali!!!***\n\n");
-			}
-			else
-			{
-				printf("\n***Giris Basarili.......\n\n");	
-				break;
-			}
-		}
-	}
-	
 	printf("\n");
 	printf("\t\t\t****************************\n");
 	printf("\t\t\t********HOSGELDINIZ*********");
-	while(secim!=0)
+	int secim=1;
+	while(secim != 0)
 	{
 		printf("\n\t\t\t****************************\n");
 		printf("\t\t\t   1-Aksiyon-Macera\n");
@@ -103,8 +61,6 @@ int main(){
 			case 8: sepet(); break;
 			case 0:	printf("\n\n\t\tProgram Sonlandiriliyor..........."); break;
 			default: secim=0;
-					printf("\n\t\t****HATALI GIRIS YAPTINIZ****");
-					sleep(2);
 			 		printf("\n\n\t\tProgram Sonlandiriliyor...........");
 			 		sleep(3);
 					break;
@@ -112,28 +68,6 @@ int main(){
 	}
 	
 	return 0;
-}
-
-void kayitol(){
-	long int sifrekontrol; //Tekrar girilen sifrenin önceki ile uyuþmasýný kontrol edecek.
-	
-	printf("\nE-Posta Adresinizi Giriniz: ");
-	scanf("%s",b[0].eposta);
-	printf("Sifrenizi Giriniz(Sifreniz Rakamlardan Olusmalidir.): ");
-	scanf("%ld",&b[0].sifre);
-	printf("Sifrenizi Tekrar Giriniz: ");
-	scanf("%ld",&sifrekontrol);
-	
-	if(b[0].sifre==sifrekontrol) //Tekrar girilen sifre, önceki ile uyuþmaz ise hata verecek
-	{
-		printf("\nKayit Basarili. Giris Ekranina Yonlendiriliyorsunuz...\n\n");
-		sleep(1);
-	}
-	else
-	{
-		printf("\n!!!!!Girdiginiz Sifreler Uyusmamaktadir.!!!!!\n\n");
-		sleep(1);
-	}
 }
 
 int sepet(){
@@ -176,24 +110,12 @@ int sepet(){
     
 	    switch(secim){
 	        case 1: printf("\nToplam Tutar: %5.2f",tutar);
-	                printf("\nOdeme Yapmak Icin Sifrenizi Giriniz: ");
-	                scanf("%ld",&sifre);
-	                if(sifre==b[0].sifre)	//sifre dogru ise ödemeyi alacak
-	                {
-	                    printf("\n*****Odemeniz Yapilmistir.*****\n");
-	                    sleep(1);
-	                    printf("*****Faturaniz %s Adresine Gonderilmistir.*****\n",b[0].eposta);
-	                    sleep(1);
-	                    printf("*****Bizi Tercih Ettiginiz Icin Tesekkurler.*****\n");
-	                    sleep(2);
-	                    tutar=0;
-	                    sepetsayac=0;
-	                }
-	                else
-	                {
-	                    printf("\n******Girdiginiz Sifre Yanlistir. Lutfen Tekrar Deneyiniz.");
-	                    sleep(1);
-	                }
+                    printf("\n*****Odemeniz Yapilmistir.*****\n");
+                    sleep(1);
+                    printf("*****Bizi Tercih Ettiginiz Icin Tesekkurler.*****\n");
+                    sleep(2);
+                    tutar=0;
+                    sepetsayac=0;
 	                break;
 	        case 2: return 0; break;
 	        case 3: printf("\nCikarmak Istediginiz Kitabin Barkod Numarasini Giriniz: ");
